@@ -1,39 +1,40 @@
+#include <stdlib.h>
 #include "lists.h"
 
 /**
- * add_dnodeint_end - adds a new node at the end
- * of a dlistint_t list
- *
- * @head: head of the list
- * @n: value of the element
- * Return: the address of the new element
- */
+ *add_dnodeint_end - adds a new node at the end of a dlistint_t list
+ * @head: head  linked list
+ * @n: attribute
+ * Return: dlistint_t typr struct
+ **/
+
 dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 {
-	dlistint_t *h;
-	dlistint_t *new;
+	dlistint_t *tail, *temp;
 
-	new = malloc(sizeof(dlistint_t));
-	if (new == NULL)
+	temp = *head;
+
+	tail = malloc(sizeof(dlistint_t));
+
+	if (tail == NULL)
+	{
 		return (NULL);
-
-	new->n = n;
-	new->next = NULL;
-
-	h = *head;
-
-	if (h != NULL)
-	{
-		while (h->next != NULL)
-			h = h->next;
-		h->next = new;
-	}
-	else
-	{
-		*head = new;
 	}
 
-	new->prev = h;
+	tail->n = n;
+	tail->next = NULL;
 
-	return (new);
+	if (*head == NULL)
+	{
+		tail->prev = NULL;
+		*head = tail;
+		return (tail);
+	}
+	while (temp->next != NULL)
+	{
+		temp = temp->next;
+	}
+	temp->next = tail;
+	tail->prev = temp;
+	return (tail);
 }
