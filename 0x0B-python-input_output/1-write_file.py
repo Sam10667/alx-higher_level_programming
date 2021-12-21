@@ -1,17 +1,17 @@
 #!/usr/bin/python3
-"""Module holds a function that prints the number of lines
+"""Module that holds a function that writes a file
 """
 
 
-def number_of_lines(filename=""):
-    """Returns the number of lines of a text file
+def write_file(filename="", text=""):
+    """Writes a string to a text file (UTF8) and returns the number
+    of characters written.
     Args:
-        filename: the file to read
+        filename: The file to write to
+        text: The text to write to filename
     """
 
-    counter = 0
+    with open(filename, mode='w', encoding='utf-8') as f:
+        char_count = f.write(text)
 
-    with open(filename) as f:
-        for line in f:
-            counter = counter + 1
-    return counter
+    return (char_count)
